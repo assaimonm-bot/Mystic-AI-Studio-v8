@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Mystic AI Studio v8</title>
+
+<link rel="stylesheet"
+href="style.css">
+
+</head>
+
+<body>
+
+<header class="header">
+
+<h1>🎬 Mystic AI Studio</h1>
+
+<button id="loginPageBtn">
+
+Login
+
+</button>
+
+</header>
+
+<nav class="navbar">
+
+<button id="homeBtn">🏠 Home</button>
+
+<button id="imageBtn">🖼️ Image</button>
+
+<button id="videoBtn">🎬 Video</button>
+
+<button id="historyBtn">📜 History</button>
+
+<button id="settingBtn">⚙️ Settings</button>
+
+</nav>
+
+<main>
+
+<section id="homePage">
+
+<div class="card">
+
+<h2>Welcome</h2>
+
+<p>Create AI Images and AI Videos using Flux Pro & Veo 3.1</p>
+
+</div>
+
+</section>
+
+<section id="imagePage" class="hidden">
+
+<div class="card">
+
+<h2>AI Image Generator</h2>
+
+<textarea
+id="imagePrompt"
+placeholder="Describe your image..."></textarea>
+
+<button id="generateImage">
+
+Generate Image
+
+</button>
+
+<div id="imageResult">
+
+No Image
+
+</div>
+
+</div>
+
+</section>
+
+<section id="videoPage" class="hidden">
+
+<div class="card">
+
+<h2>AI Video Generator</h2>
+
+<textarea
+id="videoPrompt"
+placeholder="Describe your video..."></textarea>
+
+<button id="generateVideo">
+
+Generate Video
+
+</button>
+
+<div id="videoResult">
+
+No Video
+
+</div>
+
+</div>
+
+</section><!-- History -->
+<section id="historyPage" class="hidden">
+
+<div class="card">
+
+<h2>📜 History</h2>
+
+<div id="historyList">
+No History
+</div>
+
+</div>
+
+</section>
+
+<!-- Settings -->
+<section id="settingsPage" class="hidden">
+
+<div class="card">
+
+<h2>⚙️ Settings</h2>
+
+<button id="darkModeBtn">
+🌙 Dark Mode
+</button>
+
+<button id="logoutBtn">
+🚪 Logout
+</button>
+
+</div>
+
+</section>
+
+</main>
+
+<script src="firebase.js" type="module"></script>
+<script src="app.js"></script>
+
+l</body>
+</html>
