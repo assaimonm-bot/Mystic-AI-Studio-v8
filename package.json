@@ -1,0 +1,8 @@
+{
+  "name": "mystic-ai-studio-v8",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "@fal-ai/client": "^1.5.8"
+  }
+}
