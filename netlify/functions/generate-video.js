@@ -1,24 +1,35 @@
-exports.handler = async (event) => {
-  const { prompt } = JSON.parse(event.body);
+import { fal } from "@fal-ai/client";
 
-  const response = await fetch("https://fal.run/fal-ai/veo3.1/fast", {
-    method: "POST",
-    headers: {
-      "Authorization": `Key ${process.env.FAL_KEY}`,
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-      prompt,
-      aspect_ratio: "16:9",
-      duration: "8s",
-      resolution: "720p"
-    })
-  });
+fal.config({
+  credentials: process.env.FAL_KEY,
+});
 
-  const data = await response.json();
+export async function handler(event) {
+  try {
+    const { prompt } = JSON.parse(event.body);
 
-  return {
-    statusCode: 200,
-    body: JSON.stringify(data)
-  };
-};
+    const result = await fal.subscribe("fal-ai/veo3.1/fast", {
+      input: {
+        prompt: prompt,
+        aspect_ratio: "16:9",
+        duration: "8s",
+        resolution: "720p"
+      }
+    });
+
+    return {
+      statusCode: 200,
+      body: JSON.stringify({
+        video: result.data.video.url
+      })
+    };
+
+  } catch (error) {
+    return {
+      statusCode: 500,
+      body: JSON.stringify({
+        error: error.message
+      })
+    };
+  }
+}
