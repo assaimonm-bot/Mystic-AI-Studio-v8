@@ -1,21 +1,32 @@
-exports.handler = async (event) => {
-  const { prompt } = JSON.parse(event.body);
+import { fal } from "@fal-ai/client";
 
-  const response = await fetch("https://fal.run/fal-ai/flux/dev", {
-    method: "POST",
-    headers: {
-      "Authorization": `Key ${process.env.FAL_KEY}`,
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-      prompt: prompt
-    })
-  });
+fal.config({
+  credentials: process.env.FAL_KEY,
+});
 
-  const data = await response.json();
+export async function handler(event) {
+  try {
+    const { prompt } = JSON.parse(event.body);
 
-  return {
-    statusCode: 200,
-    body: JSON.stringify(data)
-  };
-};
+    const result = await fal.subscribe("fal-ai/flux/dev", {
+      input: {
+        prompt: prompt
+      }
+    });
+
+    return {
+      statusCode: 200,
+      body: JSON.stringify({
+        image: result.data.images[0].url
+      })
+    };
+
+  } catch (error) {
+    return {
+      statusCode: 500,
+      body: JSON.stringify({
+        error: error.message
+      })
+    };
+  }
+}
